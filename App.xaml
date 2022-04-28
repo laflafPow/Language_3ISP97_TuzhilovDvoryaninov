@@ -1,0 +1,9 @@
+﻿<Application x:Class="Language_3ISP97_TuzhilovDvoryaninov.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Language_3ISP97_TuzhilovDvoryaninov"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
