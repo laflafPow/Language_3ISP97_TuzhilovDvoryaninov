@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Language_3ISP97_TuzhilovDvoryaninov.EF
 {
-    public partial class Client
+    class ClientServiceClass
     {
-
     }
 }

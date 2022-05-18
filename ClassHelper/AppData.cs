@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Language_3ISP97_TuzhilovDvoryaninov.ClassHelper
 {
-    class AddData
+    public class AppData
     {
+        public static EF.Entities1 Context { get; } = new EF.Entities1();
     }
 }
