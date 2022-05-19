@@ -34,7 +34,7 @@
                     BorderBrush="{x:Null}"
                     Height="26"
                     Width="124"
-                    FontFamily="Comic Sans MS"/>
+                    FontFamily="Comic Sans MS" Click="btnClearFilter_Click"/>
         </WrapPanel>
 
         <WrapPanel Grid.Row="1" VerticalAlignment="Center">
@@ -74,7 +74,8 @@
                       FontSize="14"
                       Margin="10"
                       FontFamily="Comic Sans MS"
-                      Checked="chbBirthday_Checked"/>
+                      Checked="chbBirthday_Checked"
+                      Unchecked="chbBirthday_Unchecked"/>
         </WrapPanel>
         
         <WrapPanel
@@ -96,6 +97,7 @@
                 FontFamily="Comic Sans"
                 FontSize="14"
                 Margin="20 0"
+                SelectionChanged="cbPage_SelectionChanged"
             />
 
             <Button
@@ -106,7 +108,7 @@
                 Margin="20 0"
                 Height="30"
                 Width="120"
-                Background="#FFE7FABF"
+                Background="#FFE7FABF" Click="btnBack_Click"
             />
 
             <TextBlock 
@@ -140,7 +142,7 @@
                 Margin="20 0"
                 Height="30"
                 Width="120"
-                Background="#FFE7FABF"
+                Background="#FFE7FABF" Click="btnNext_Click"
             />
         </WrapPanel>
         

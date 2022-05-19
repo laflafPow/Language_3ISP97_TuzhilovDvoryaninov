@@ -19,7 +19,7 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
 {
     public partial class MainWindow : Window
     {
-        int numberPage = 0;
+        int numberPage = 1;
         int countClient;
 
         public MainWindow()
@@ -30,6 +30,7 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             genders.Insert(0, new Gender() { Title = "Все" });
             cbGender.ItemsSource = genders;
             cbGender.DisplayMemberPath = "Title";
+            cbGender.SelectedIndex = 0;
 
             cbSort.SelectedIndex = 0;
             cbSort.ItemsSource = new List<String>
@@ -86,16 +87,56 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                     break;
             }
 
-            if (chbBirthday.IsChecked == true)
+            if (chbBirthday.IsChecked == false)
             {
-                list = list.Where(i => i.DateOfBirth.Month == DateTime.Today.Month).ToList();
+                
             }
             else
             {
-                list = Context.Client.ToList();
-                Filter();
+                list = list.Where(i => i.DateOfBirth.Month == DateTime.Today.Month).ToList();
             }
 
+            switch (cbPage.SelectedIndex)
+            {
+                case 0:
+                    tbCountPage.Text = "1";
+                    break;
+                case 1:
+                    tbCountPage.Text = ((countClient / 10) + 1).ToString();
+                    list = list.Skip(numberPage * 10).Take(10).ToList();
+                    break;
+                case 2:
+                    tbCountPage.Text = ((countClient / 50) + 1).ToString();
+                    list = list.Skip(numberPage * 50).Take(50).ToList();
+                    break;
+                case 3:
+                    tbCountPage.Text = ((countClient / 200) + 1).ToString();
+                    list = list.Skip(numberPage * 200).Take(200).ToList();
+                    break;
+            }
+
+            countClient = list.Count;
+            
+            tbNumberPage.Text = (numberPage).ToString();
+
+            if (numberPage == 1)
+            {
+                btnBack.IsEnabled = false;
+            }
+            else
+            {
+                btnBack.IsEnabled = true;
+
+            }
+
+            if (numberPage == Convert.ToInt32(tbCountPage.Text))
+            {
+                btnNext.IsEnabled = false;
+            }
+            else
+            {
+                btnNext.IsEnabled = true;
+            }
 
             LVClientList.ItemsSource = list;
         }
@@ -119,5 +160,36 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
         {
             Filter();
         }
+
+        private void chbBirthday_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void btnClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            cbGender.SelectedIndex = 0;
+            cbSort.SelectedIndex = 0;
+            chbBirthday.IsChecked = false;
+            Filter();
+        }
+
+        private void cbPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            numberPage += 1;
+            Filter();
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            numberPage -= 1;
+            Filter();
+        }
+
     }
 }
