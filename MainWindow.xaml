@@ -45,7 +45,8 @@
                        Margin="10"/>
 
             <ComboBox   x:Name="cbGender"
-                        Width="80"/>
+                        Width="80"
+                        SelectionChanged="cbGender_SelectionChanged"/>
             
             <TextBlock Text="Поиск"
                        FontFamily="Comic Sans MS"
@@ -54,7 +55,8 @@
                        Margin="10"/>
 
             <TextBox    x:Name="tbSearch"
-                        Width="120"/>
+                        Width="120"
+                        TextChanged="tbSearch_TextChanged"/>
 
             <TextBlock Text="Сортировка"
                        FontFamily="Comic Sans MS"
@@ -63,14 +65,16 @@
                        Margin="10"/>
 
             <ComboBox   x:Name="cbSort"
-                        Width="80"/>
+                        Width="80"
+                        SelectionChanged="cbSort_SelectionChanged"/>
 
             <CheckBox x:Name="chbBirthday"
                       Content="День рождения в текущем месяце"
                       VerticalAlignment="Center"
                       FontSize="14"
                       Margin="10"
-                      FontFamily="Comic Sans MS"/>
+                      FontFamily="Comic Sans MS"
+                      Checked="chbBirthday_Checked"/>
         </WrapPanel>
         
         <WrapPanel

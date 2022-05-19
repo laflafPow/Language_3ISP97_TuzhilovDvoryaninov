@@ -80,7 +80,6 @@
     <Compile Include="EF\ClientService.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\ClientServiceClass.cs" />
     <Compile Include="EF\ClientServiceDocument.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

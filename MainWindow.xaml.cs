@@ -19,6 +19,9 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
 {
     public partial class MainWindow : Window
     {
+        int numberPage = 0;
+        int countClient;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +30,6 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             genders.Insert(0, new Gender() { Title = "Все" });
             cbGender.ItemsSource = genders;
             cbGender.DisplayMemberPath = "Title";
-            cbGender.SelectedIndex = 0;
 
             cbSort.SelectedIndex = 0;
             cbSort.ItemsSource = new List<String>
@@ -49,7 +51,18 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
 
         public void Filter()
         {
-            var list = Context.Client.ToList();
+            List<EF.Client> list = new List<EF.Client>();
+
+            list = Context.Client.ToList();
+
+            list = list.
+                Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower())
+                || i.FirstName.ToLower().Contains(tbSearch.Text.ToLower())
+                || i.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())
+                || i.FIO.ToLower().Contains(tbSearch.Text.ToLower())
+                || i.Phone.ToLower().Contains(tbSearch.Text.ToLower())
+                || i.Email.ToLower().Contains(tbSearch.Text.ToLower())).
+                ToList();
 
             if (cbGender.SelectedIndex != 0)
             {
@@ -59,12 +72,52 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
 
             switch (cbSort.SelectedIndex)
             {
+                case 0:
+                    list = list.OrderBy(i => i.ID).ToList();
+                    break;
                 case 1:
                     list = list.OrderBy(i => i.LastName).ToList();
                     break;
-                
+                case 2:
+                    list = list.OrderByDescending(i => i.LastVisit).ToList();
+                    break;
+                case 3:
+                    list = list.OrderByDescending(i => i.CountVisit).ToList();
+                    break;
             }
 
+            if (chbBirthday.IsChecked == true)
+            {
+                list = list.Where(i => i.DateOfBirth.Month == DateTime.Today.Month).ToList();
+            }
+            else
+            {
+                list = Context.Client.ToList();
+                Filter();
+            }
+
+
+            LVClientList.ItemsSource = list;
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void chbBirthday_Checked(object sender, RoutedEventArgs e)
+        {
+            Filter();
         }
     }
 }

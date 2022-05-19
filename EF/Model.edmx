@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
@@ -277,215 +277,11 @@
             <End Role="TagClient" EntitySet="TagClient" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ISP97_Tuzhilov_Dvoryaninov_LanguageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IDGender" Type="Int32" Nullable="false" />
-          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Photo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
-          <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Client" FromRole="Client" ToRole="ClientService" />
-          <NavigationProperty Name="Tag" Relationship="Self.TagClient" FromRole="Client" ToRole="Tag" />
-        </EntityType>
-        <EntityType Name="ClientService">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDClient" Type="Int32" Nullable="false" />
-          <Property Name="IDService" Type="Int32" Nullable="false" />
-          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="FinalCost" Type="Decimal" Precision="7" Scale="2" />
-          <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="DateEnd" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_ClientService_Client" FromRole="ClientService" ToRole="Client" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_ClientService_Service" FromRole="ClientService" ToRole="Service" />
-          <NavigationProperty Name="ClientServiceDocument" Relationship="Self.FK_ClientServiceDocument_ClientService" FromRole="ClientService" ToRole="ClientServiceDocument" />
-        </EntityType>
-        <EntityType Name="ClientServiceDocument">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDClientService" Type="Int32" Nullable="false" />
-          <Property Name="Document" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientServiceDocument_ClientService" FromRole="ClientServiceDocument" ToRole="ClientService" />
-        </EntityType>
-        <EntityType Name="Gender">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
-        </EntityType>
-        <EntityType Name="PhotoService">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDService" Type="Int32" Nullable="false" />
-          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_PhotoService_Service" FromRole="PhotoService" ToRole="Service" />
-        </EntityType>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Discount" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
-          <Property Name="DurationInMinute" Type="Int32" Nullable="false" />
-          <Property Name="MainPhoto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IsGender" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Service" FromRole="Service" ToRole="ClientService" />
-          <NavigationProperty Name="PhotoService" Relationship="Self.FK_PhotoService_Service" FromRole="Service" ToRole="PhotoService" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Tag">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Color" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.TagClient" FromRole="Tag" ToRole="Client" />
-        </EntityType>
-        <EntityType Name="VW_ClientDetails">
-          <Key>
-            <PropertyRef Name="NameClient" />
-            <PropertyRef Name="DateOfBirth" />
-          </Key>
-          <Property Name="NameClient" Type="String" MaxLength="302" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Age" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="TagCount" Type="Int32" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="LastVisit" Type="DateTime" Precision="3" />
-        </EntityType>
-        <Association Name="FK_Client_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gender">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="IDGender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientService_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="ClientService" Type="Self.ClientService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ClientService">
-              <PropertyRef Name="IDClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientService_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="ClientService" Type="Self.ClientService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ClientService">
-              <PropertyRef Name="IDService" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientServiceDocument_ClientService">
-          <End Role="ClientService" Type="Self.ClientService" Multiplicity="1" />
-          <End Role="ClientServiceDocument" Type="Self.ClientServiceDocument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClientService">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ClientServiceDocument">
-              <PropertyRef Name="IDClientService" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PhotoService_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="PhotoService" Type="Self.PhotoService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PhotoService">
-              <PropertyRef Name="IDService" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TagClient">
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="ClientService" EntityType="Self.ClientService" />
-          <EntitySet Name="ClientServiceDocument" EntityType="Self.ClientServiceDocument" />
-          <EntitySet Name="Gender" EntityType="Self.Gender" />
-          <EntitySet Name="PhotoService" EntityType="Self.PhotoService" />
-          <EntitySet Name="Service" EntityType="Self.Service" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Tag" EntityType="Self.Tag" />
-          <EntitySet Name="VW_ClientDetails" EntityType="Self.VW_ClientDetails" />
-          <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientService_Client" Association="Self.FK_ClientService_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="ClientService" EntitySet="ClientService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientService_Service" Association="Self.FK_ClientService_Service">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="ClientService" EntitySet="ClientService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientServiceDocument_ClientService" Association="Self.FK_ClientServiceDocument_ClientService">
-            <End Role="ClientService" EntitySet="ClientService" />
-            <End Role="ClientServiceDocument" EntitySet="ClientServiceDocument" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PhotoService_Service" Association="Self.FK_PhotoService_Service">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="PhotoService" EntitySet="PhotoService" />
-          </AssociationSet>
-          <AssociationSet Name="TagClient" Association="Self.TagClient">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Tag" EntitySet="Tag" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -516,7 +312,40 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-        </EntityContainer>
+          <EntitySet Name="Client" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client" />
+          <EntitySet Name="ClientService" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService" />
+          <EntitySet Name="ClientServiceDocument" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientServiceDocument" />
+          <EntitySet Name="Gender" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Gender" />
+          <EntitySet Name="PhotoService" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.PhotoService" />
+          <EntitySet Name="Service" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Service" />
+          <EntitySet Name="sysdiagrams" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sysdiagrams" />
+          <EntitySet Name="Tag" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Tag" />
+          <EntitySet Name="VW_ClientDetails" EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.VW_ClientDetails" />
+          <AssociationSet Name="FK_Client_Gender" Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientService_Client" Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientService" EntitySet="ClientService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientService_Service" Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ClientService" EntitySet="ClientService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientServiceDocument_ClientService" Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientServiceDocument_ClientService">
+            <End Role="ClientService" EntitySet="ClientService" />
+            <End Role="ClientServiceDocument" EntitySet="ClientServiceDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoService_Service" Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_PhotoService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="PhotoService" EntitySet="PhotoService" />
+          </AssociationSet>
+          <AssociationSet Name="TagClient" Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.TagClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Tag" EntitySet="Tag" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -528,122 +357,182 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IDGender" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Photo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Gender" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+          <NavigationProperty Name="ClientService" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Client" FromRole="Client" ToRole="ClientService" />
+          <NavigationProperty Name="Tag" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.TagClient" FromRole="Client" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="ClientService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="IDService" Type="Int32" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FinalCost" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <NavigationProperty Name="Client" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Client" FromRole="ClientService" ToRole="Client" />
+          <NavigationProperty Name="Service" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Service" FromRole="ClientService" ToRole="Service" />
+          <NavigationProperty Name="ClientServiceDocument" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientServiceDocument_ClientService" FromRole="ClientService" ToRole="ClientServiceDocument" />
+        </EntityType>
+        <EntityType Name="ClientServiceDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDClientService" Type="Int32" Nullable="false" />
+          <Property Name="Document" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientService" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientServiceDocument_ClientService" FromRole="ClientServiceDocument" ToRole="ClientService" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="PhotoService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDService" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Service" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_PhotoService_Service" FromRole="PhotoService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="DurationInMinute" Type="Int32" Nullable="false" />
+          <Property Name="MainPhoto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsGender" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClientService" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Service" FromRole="Service" ToRole="ClientService" />
+          <NavigationProperty Name="PhotoService" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_PhotoService_Service" FromRole="Service" ToRole="PhotoService" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.TagClient" FromRole="Tag" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="VW_ClientDetails">
+          <Key>
+            <PropertyRef Name="NameClient" />
+            <PropertyRef Name="DateOfBirth" />
+          </Key>
+          <Property Name="NameClient" Type="String" Nullable="false" MaxLength="302" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Age" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TagCount" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LastVisit" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Client_Gender">
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IDGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientService_Client">
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService" Role="ClientService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientService">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientService_Service">
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService" Role="ClientService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientService">
+              <PropertyRef Name="IDService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientServiceDocument_ClientService">
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService" Role="ClientService" Multiplicity="1" />
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientServiceDocument" Role="ClientServiceDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientServiceDocument">
+              <PropertyRef Name="IDClientService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoService_Service">
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.PhotoService" Role="PhotoService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhotoService">
+              <PropertyRef Name="IDService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TagClient">
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client" Role="Client" Multiplicity="*" />
+          <End Type="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModelContainer" CdmEntityContainer="Entities1">
-          <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
-                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientService">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService">
-              <MappingFragment StoreEntitySet="ClientService">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
-                <ScalarProperty Name="IDService" ColumnName="IDService" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="FinalCost" ColumnName="FinalCost" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientServiceDocument">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientServiceDocument">
-              <MappingFragment StoreEntitySet="ClientServiceDocument">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDClientService" ColumnName="IDClientService" />
-                <ScalarProperty Name="Document" ColumnName="Document" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Gender">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Gender">
-              <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PhotoService">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.PhotoService">
-              <MappingFragment StoreEntitySet="PhotoService">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDService" ColumnName="IDService" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Service">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Service">
-              <MappingFragment StoreEntitySet="Service">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="DurationInMinute" ColumnName="DurationInMinute" />
-                <ScalarProperty Name="MainPhoto" ColumnName="MainPhoto" />
-                <ScalarProperty Name="IsGender" ColumnName="IsGender" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tag">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Tag">
-              <MappingFragment StoreEntitySet="Tag">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VW_ClientDetails">
-            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.VW_ClientDetails">
-              <MappingFragment StoreEntitySet="VW_ClientDetails">
-                <ScalarProperty Name="NameClient" ColumnName="NameClient" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="TagCount" ColumnName="TagCount" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="TagClient" TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.TagClient" StoreEntitySet="TagClient">
-            <EndProperty Name="Client">
-              <ScalarProperty Name="ID" ColumnName="IDClient" />
-            </EndProperty>
-            <EndProperty Name="Tag">
-              <ScalarProperty Name="ID" ColumnName="IDTag" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sp_dropdiagram" />
@@ -668,7 +557,117 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientService">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService">
+              <MappingFragment StoreEntitySet="ClientService">
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="FinalCost" ColumnName="FinalCost" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="IDService" ColumnName="IDService" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientServiceDocument">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientServiceDocument">
+              <MappingFragment StoreEntitySet="ClientServiceDocument">
+                <ScalarProperty Name="Document" ColumnName="Document" />
+                <ScalarProperty Name="IDClientService" ColumnName="IDClientService" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoService">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.PhotoService">
+              <MappingFragment StoreEntitySet="PhotoService">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IDService" ColumnName="IDService" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="IsGender" ColumnName="IsGender" />
+                <ScalarProperty Name="MainPhoto" ColumnName="MainPhoto" />
+                <ScalarProperty Name="DurationInMinute" ColumnName="DurationInMinute" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tag">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_ClientDetails">
+            <EntityTypeMapping TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.VW_ClientDetails">
+              <MappingFragment StoreEntitySet="VW_ClientDetails">
+                <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="TagCount" ColumnName="TagCount" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="NameClient" ColumnName="NameClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TagClient" TypeName="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.TagClient" StoreEntitySet="TagClient">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="ID" ColumnName="IDTag" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="ID" ColumnName="IDClient" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

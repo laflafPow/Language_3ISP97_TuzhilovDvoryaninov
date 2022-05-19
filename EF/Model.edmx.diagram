@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="825a676ab49a40b9aeecd7f3c064b99c" Name="Diagram1">
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientServiceDocument" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Gender" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.PhotoService" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Service" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Tag" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.VW_ClientDetails" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_Client_Gender" ManuallyRouted="false" />
-        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Service" ManuallyRouted="false" />
-        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientServiceDocument_ClientService" ManuallyRouted="false" />
-        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_PhotoService_Service" ManuallyRouted="false" />
-        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.TagClient" ManuallyRouted="false" />
+      <Diagram DiagramId="825a676ab49a40b9aeecd7f3c064b99c" Name="Diagram1" ZoomLevel="46">
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Client" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientService" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.ClientServiceDocument" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Gender" Width="1.5" PointX="1.5" PointY="12.125" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.PhotoService" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Service" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.Tag" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.VW_ClientDetails" Width="1.5" PointX="7.75" PointY="0.75" />
+        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_Client_Gender" />
+        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Client" />
+        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientService_Service" />
+        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_ClientServiceDocument_ClientService" />
+        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.FK_PhotoService_Service" />
+        <AssociationConnector Association="ISP97_Tuzhilov_Dvoryaninov_LanguageModel.TagClient" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
