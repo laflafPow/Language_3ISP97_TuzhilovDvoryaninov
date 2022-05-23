@@ -64,6 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ClientAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +77,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClassHelper\AppData.cs" />
+    <Compile Include="ClassHelper\ValidationClass.cs" />
+    <Compile Include="ClientAddWindow.xaml.cs">
+      <DependentUpon>ClientAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EF\Client.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -178,6 +186,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\clientDefault.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

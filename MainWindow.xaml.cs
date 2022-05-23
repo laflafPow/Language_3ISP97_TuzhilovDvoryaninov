@@ -191,5 +191,10 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             Filter();
         }
 
+        private void btnAddClient_Click(object sender, RoutedEventArgs e)
+        {
+            ClientAddWindow clientAddWindow = new ClientAddWindow();
+            clientAddWindow.ShowDialog();
+        }
     }
 }
