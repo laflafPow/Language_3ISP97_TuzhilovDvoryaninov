@@ -248,8 +248,28 @@
                     <GridViewColumn Header="E-mail" Width="140"
                                     DisplayMemberBinding="{Binding Email}"/>
                     <GridViewColumn Header="Дата регистрации" Width="150"
-                                    DisplayMemberBinding="{Binding RegistrationDate}"/> 
-
+                                    DisplayMemberBinding="{Binding RegistrationDate}"/>
+                    <GridViewColumn Header="Последнее помещение" Width="140"
+                                    DisplayMemberBinding="{Binding LastVisit}"/>
+                    <GridViewColumn Header="Кол-во посещений" Width="150"
+                                    DisplayMemberBinding="{Binding CountVisit}"/>
+                    <GridViewColumn Header="Tag" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Tag}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Title}">
+                                                <TextBlock.Background>
+                                                    <SolidColorBrush Color="{Binding Color}"/>
+                                                </TextBlock.Background>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                      </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

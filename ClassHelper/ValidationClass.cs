@@ -45,6 +45,8 @@ namespace Language_3ISP97_TuzhilovDvoryaninov.ClassHelper
                 !phone.Contains("(") && !phone.Contains(")") && 
                 !phone.Contains(" ") && phone.Any(Char.IsPunctuation))
                 return false;
+            if (phone == "")
+                return false;
 
             return true;
         }

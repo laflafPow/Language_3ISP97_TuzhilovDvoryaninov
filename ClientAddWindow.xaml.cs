@@ -54,6 +54,12 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                 return;
             }
 
+            if (txtEmail.Text == "")
+            {
+                MessageBox.Show("Пустое поле Email!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if(ValidationClass.ValidationEmail(txtEmail.Text) == false)
             {
                 MessageBox.Show("Недопустимый Email!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -63,6 +69,12 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             if (ValidationClass.ValidationPhone(txtPhone.Text) == false)
             {
                 MessageBox.Show("Недопустимый номер телефона!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (dpDateOfBirth.SelectedDate.HasValue == false)
+            {
+                MessageBox.Show("Ошибка в поле даты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -76,12 +88,14 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             try
             {
                 EF.Client newClient = new EF.Client();
+                newClient.ID = Convert.ToInt32(tbID.Text);
                 newClient.LastName = txtLastName.Text;
                 newClient.FirstName = txtFirstName.Text;
                 newClient.Patronymic = txtPatronymic.Text;
                 newClient.Phone = txtPhone.Text;
                 newClient.Email = txtEmail.Text;
                 newClient.DateOfBirth = dpDateOfBirth.SelectedDate.Value;
+                newClient.RegistrationDate = DateTime.Now;
 
                 if (rbMale.IsChecked == true)
                 {
