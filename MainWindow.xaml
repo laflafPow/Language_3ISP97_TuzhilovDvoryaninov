@@ -233,14 +233,15 @@
                   x:Name="LVClientList">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="ID" Width="40"
+                                    DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="Имя" Width="70"
                                     DisplayMemberBinding="{Binding FirstName}"/>
                     <GridViewColumn Header="Фамилия" Width="85"
                                     DisplayMemberBinding="{Binding LastName}"/>
                     <GridViewColumn Header="Отчество" Width="120"
                                     DisplayMemberBinding="{Binding Patronymic}"/>
-                    <GridViewColumn Header="Пол" Width="65" 
-                                    DisplayMemberBinding="{Binding Gender.Title}"/>
+                    
                     <GridViewColumn Header="Дата рождения" Width="150"
                                     DisplayMemberBinding="{Binding DateOfBirth}"/>
                     <GridViewColumn Header="Номер телефона" Width="110"

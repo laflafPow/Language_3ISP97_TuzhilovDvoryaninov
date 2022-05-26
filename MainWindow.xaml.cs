@@ -96,30 +96,32 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                 list = list.Where(i => i.DateOfBirth.Month == DateTime.Today.Month).ToList();
             }
 
+            var listView = list;
+
             switch (cbPage.SelectedIndex)
             {
                 case 0:
                     tbCountPage.Text = "1";
                     break;
                 case 1:
-                    tbCountPage.Text = ((countClient / 10) + 1).ToString();
-                    list = list.Skip(numberPage * 10).Take(10).ToList();
+                    tbCountPage.Text = ((countClient / 10) - 1).ToString();
+                    listView = list.Skip(numberPage * 10).Take(10).ToList();
                     break;
                 case 2:
-                    tbCountPage.Text = ((countClient / 50) + 1).ToString();
-                    list = list.Skip(numberPage * 50).Take(50).ToList();
+                    tbCountPage.Text = (countClient / 50).ToString();
+                    listView = list.Skip(numberPage * 50).Take(50).ToList();
                     break;
                 case 3:
-                    tbCountPage.Text = ((countClient / 200) + 1).ToString();
-                    list = list.Skip(numberPage * 200).Take(200).ToList();
+                    tbCountPage.Text = (countClient / 200).ToString();
+                    listView = list.Skip(numberPage * 200).Take(200).ToList();
                     break;
             }
 
             countClient = list.Count;
             
-            tbNumberPage.Text = (numberPage).ToString();
+            tbNumberPage.Text = (numberPage + 1).ToString();
 
-            if (numberPage == 1)
+            if (numberPage == 0)
             {
                 btnBack.IsEnabled = false;
             }
@@ -129,7 +131,7 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
 
             }
 
-            if (numberPage == Convert.ToInt32(tbCountPage.Text))
+            if (numberPage == Convert.ToInt32(tbCountPage.Text) - 1)
             {
                 btnNext.IsEnabled = false;
             }
@@ -138,7 +140,10 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                 btnNext.IsEnabled = true;
             }
 
-            LVClientList.ItemsSource = list;
+            LVClientList.ItemsSource = listView;
+
+            tbNumberPage.Text = (listView.Count * numberPage).ToString();
+            tbCountPage.Text = list.Count.ToString();
         }
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
