@@ -228,7 +228,7 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Margin="10 0 0 0">
-            
+
             <RadioButton
                 x:Name="rbMale"
                 Content="Мужской"
@@ -236,7 +236,7 @@
                 FontSize="24"
                 IsChecked="True"
             />
-            
+
             <RadioButton
                 x:Name="rbFemale"
                 Content="Женский"
@@ -250,18 +250,16 @@
                 Grid.Row="8"
                 Grid.ColumnSpan="2"
                 Grid.RowSpan="3"
-                Width="100"
-                Height="100"
-                Margin="5"
-                CornerRadius="50">
+                Width="120"
+                Height="120"
+                Margin="5">
             <Image x:Name="photoUser" 
                    Source="/Language_3ISP97_TuzhilovDvoryaninov;component/Resource/clientDefault.png"
-                   Width="100"
-                   Height="100"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Top"/>
+                   VerticalAlignment="Center"
+            />
         </Border>
-        
+
         <Button 
             x:Name="btnChoosePhoto"                
             Grid.Row="10" 
@@ -280,7 +278,7 @@
             BorderBrush="{x:Null}"
             Click="btnChoosePhoto_Click"
         />
-        
+
         <Button
             x:Name="btnAdd"
             Grid.Row="11"

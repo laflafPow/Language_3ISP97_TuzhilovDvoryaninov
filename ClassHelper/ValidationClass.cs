@@ -50,5 +50,11 @@ namespace Language_3ISP97_TuzhilovDvoryaninov.ClassHelper
 
             return true;
         }
+
+        public static bool ValidationDateBirthday(DateTime DateBirthday)
+        {
+            if (DateBirthday > DateTime.Now) return false;
+            return true;
+        }
     }
 }

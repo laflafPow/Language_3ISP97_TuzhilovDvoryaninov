@@ -68,6 +68,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ListOfClientServices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +92,7 @@
     <Compile Include="EF\ClientService.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\ClientServiceClass.cs" />
     <Compile Include="EF\ClientServiceDocument.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -129,6 +134,9 @@
     </Compile>
     <Compile Include="EF\VW_ClientDetails.cs">
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListOfClientServices.xaml.cs">
+      <DependentUpon>ListOfClientServices.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -186,6 +194,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\btnGo.png" />
+    <Resource Include="Resource\PhotoError.png" />
     <Resource Include="Resource\clientDefault.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

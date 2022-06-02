@@ -108,7 +108,9 @@
 
             <ComboBox   x:Name="cbGender"
                         Width="80"
-                        SelectionChanged="cbGender_SelectionChanged"/>
+                        SelectionChanged="cbGender_SelectionChanged"
+                        FontFamily="Comic Sans MS"
+                        VerticalContentAlignment="Center"/>
             
             <TextBlock Text="Поиск"
                        FontFamily="Comic Sans MS"
@@ -118,6 +120,8 @@
 
             <TextBox    x:Name="tbSearch"
                         Width="120"
+                        FontFamily="Comic Sans MS"
+                        VerticalContentAlignment="Center"
                         TextChanged="tbSearch_TextChanged"/>
 
             <TextBlock Text="Сортировка"
@@ -128,6 +132,8 @@
 
             <ComboBox   x:Name="cbSort"
                         Width="80"
+                        FontFamily="Comic Sans MS"
+                        VerticalContentAlignment="Center"
                         SelectionChanged="cbSort_SelectionChanged"/>
 
             <CheckBox x:Name="chbBirthday"
@@ -156,9 +162,10 @@
                 x:Name="cbPage"
                 Height="30"
                 Width="50"
-                FontFamily="Comic Sans"
+                FontFamily="Comic Sans MS"
                 FontSize="14"
                 Margin="20 0"
+                VerticalContentAlignment="Center"
                 SelectionChanged="cbPage_SelectionChanged"
             />
 
@@ -206,6 +213,18 @@
                 Width="120"
                 Background="#FFE7FABF" Click="btnNext_Click"
             />
+            
+            <Button
+                x:Name="btnService"
+                Content="Посещения"
+                FontFamily="Comic Sans MS"
+                FontSize="14"
+                Height="30"
+                Width="90"
+                Background="#FF05A0FF" 
+                Foreground="White"
+                Click="btnService_Click"
+            />
 
             
         </WrapPanel>
@@ -230,7 +249,9 @@
         />
 
         <ListView Grid.Row="2"
-                  x:Name="LVClientList">
+                  x:Name="LVClientList"
+                  KeyDown="lvClient_KeyDown"
+                  MouseDoubleClick="LVClientList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="40"

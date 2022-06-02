@@ -19,7 +19,8 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
 {
     public partial class MainWindow : Window
     {
-        int numberPage = 1;
+        int numberPage = 0;
+        int numberPageText = 1;
         int countClient;
 
         public MainWindow()
@@ -96,30 +97,47 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                 list = list.Where(i => i.DateOfBirth.Month == DateTime.Today.Month).ToList();
             }
 
+            tbCountPage.Text = list.Count.ToString();
+
             var listView = list;
 
             switch (cbPage.SelectedIndex)
             {
-                case 0:
-                    tbCountPage.Text = "1";
-                    break;
-                case 1:
-                    tbCountPage.Text = ((countClient / 10) - 1).ToString();
-                    listView = list.Skip(numberPage * 10).Take(10).ToList();
+                case 1:                  
+                    listView = list.Skip(numberPage * 10).Take(10).ToList();                 
                     break;
                 case 2:
-                    tbCountPage.Text = (countClient / 50).ToString();
                     listView = list.Skip(numberPage * 50).Take(50).ToList();
                     break;
                 case 3:
-                    tbCountPage.Text = (countClient / 200).ToString();
                     listView = list.Skip(numberPage * 200).Take(200).ToList();
                     break;
             }
 
-            countClient = list.Count;
-            
-            tbNumberPage.Text = (numberPage + 1).ToString();
+            if (cbPage.SelectedIndex != 0)
+            {
+                if (listView.Count < Convert.ToInt32(cbPage.SelectedItem))
+                {
+                    tbNumberPage.Text = Convert.ToString(list.Count);
+                }
+                else
+                {
+                    tbNumberPage.Text = Convert.ToString(numberPageText * Convert.ToInt32(cbPage.SelectedItem));
+                }
+            }
+            else
+            {
+                tbNumberPage.Text = Convert.ToString(list.Count);
+            }
+
+            //if (listView.Count() % 10 != 0)
+            //{
+            //    tbNumberPage.Text = Convert.ToString(list.Count);
+            //}
+            //else
+            //{
+            //    tbNumberPage.Text = Convert.ToString(numberPageText * 10);
+            //}
 
             if (numberPage == 0)
             {
@@ -130,8 +148,7 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                 btnBack.IsEnabled = true;
 
             }
-
-            if (numberPage == Convert.ToInt32(tbCountPage.Text) - 1)
+            if (tbCountPage.Text == tbNumberPage.Text)
             {
                 btnNext.IsEnabled = false;
             }
@@ -141,38 +158,48 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             }
 
             LVClientList.ItemsSource = listView;
-
-            tbNumberPage.Text = (listView.Count * numberPage).ToString();
-            tbCountPage.Text = list.Count.ToString();
         }
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
+            numberPageText = 1;
+            numberPage = 0;
             Filter();
         }
 
         private void cbGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            numberPageText = 1;
+            numberPage = 0;
             Filter();
         }
 
         private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            numberPageText = 1;
+            numberPage = 0;
             Filter();
         }
 
         private void chbBirthday_Checked(object sender, RoutedEventArgs e)
         {
+            numberPageText = 1;
+            numberPage = 0;
             Filter();
         }
 
         private void chbBirthday_Unchecked(object sender, RoutedEventArgs e)
         {
+            numberPageText = 1;
+            numberPage = 0;
             Filter();
         }
 
         private void btnClearFilter_Click(object sender, RoutedEventArgs e)
         {
+            numberPageText = 1;
+            numberPage = 0;
+            tbSearch.Text = "";
             cbGender.SelectedIndex = 0;
             cbSort.SelectedIndex = 0;
             chbBirthday.IsChecked = false;
@@ -181,25 +208,85 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
 
         private void cbPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            numberPageText = 1;
+            numberPage = 0;
             Filter();
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            numberPageText += 1;
             numberPage += 1;
             Filter();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            numberPageText -= 1;
             numberPage -= 1;
             Filter();
+        }
+
+        private void lvClient_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete || e.Key == Key.Back)
+            {
+                EF.Client clientID = LVClientList.SelectedItem as EF.Client;
+
+                if (LVClientList.SelectedItem is EF.Client)
+                {
+                    if (ClassHelper.AppData.Context.ClientService.Where(i => i.IDClient == clientID.ID).ToList().FirstOrDefault() != null)
+                    {
+                        MessageBox.Show("Нельзя удалить клиента, так как он имеет информацию о посещении", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    else
+                    {
+                        var result = MessageBox.Show("Вы уверены, что хотите удалить клиента?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                        if (result.ToString() == "Yes")
+                        {
+                            ClassHelper.AppData.Context.Client.Remove(clientID);
+                            ClassHelper.AppData.Context.SaveChanges();
+                            Filter();
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
         }
 
         private void btnAddClient_Click(object sender, RoutedEventArgs e)
         {
             ClientAddWindow clientAddWindow = new ClientAddWindow();
             clientAddWindow.ShowDialog();
+            Filter();
+        }
+
+        private void LVClientList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (LVClientList.SelectedItem is EF.Client)
+            {
+                var client = LVClientList.SelectedItem as EF.Client;
+
+                ClientAddWindow clientAddWindow = new ClientAddWindow(client);
+                clientAddWindow.ShowDialog();
+                Filter();
+
+            }
+        }
+
+        private void btnService_Click(object sender, RoutedEventArgs e)
+        {
+            if (LVClientList.SelectedItem is EF.Client)
+            {
+                EF.Client client = LVClientList.SelectedItem as EF.Client;
+
+                ListOfClientServices services = new ListOfClientServices(client);
+                services.ShowDialog();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,49 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             isEdit = false;
         }
 
+        public ClientAddWindow(EF.Client client)
+        {
+            InitializeComponent();
+
+            tbID.Text = client.ID.ToString();
+            txtLastName.Text = client.LastName;
+            txtFirstName.Text = client.FirstName;
+            txtPatronymic.Text = client.Patronymic;
+            txtPhone.Text = client.Phone;
+            txtEmail.Text = client.Email;
+            dpDateOfBirth.SelectedDate = client.DateOfBirth;
+
+            if (client.IDGender == 1)
+            {
+                rbMale.IsChecked = true;
+            }
+            else
+            {
+                rbFemale.IsChecked = true;
+            }
+                
+            if (client.Photo != null)
+            {
+                try
+                {
+                    photoUser.Source = new BitmapImage(new Uri(client.Photo));
+                }
+                catch (Exception)
+                {
+                    var uriSource = new Uri(@"/Language_3ISP97_TuzhilovDvoryaninov;component/Resource/PhotoError.png", UriKind.Relative);
+                    photoUser.Source = new BitmapImage(uriSource);
+                    MessageBox.Show("Не удается найти путь фото!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }              
+            }
+
+            tbTitle.Text = "Изменение данных клиента";
+            btnAdd.Content = "Сохранить";
+
+            isEdit = true;
+
+            editClient = client;
+        }
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (ValidationClass.ValidationFIO(txtLastName.Text) == false)
@@ -48,11 +92,14 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                 return;
             }
 
-            if (ValidationClass.ValidationFIO(txtPatronymic.Text) == false)
+            if (txtPatronymic.Text != "")
             {
-                MessageBox.Show("Недопустимое отчество!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+                if (ValidationClass.ValidationFIO(txtPatronymic.Text) == false)
+                {
+                    MessageBox.Show("Недопустимое отчество!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }         
 
             if (txtEmail.Text == "")
             {
@@ -72,56 +119,119 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
                 return;
             }
 
-            if (dpDateOfBirth.SelectedDate.HasValue == false)
+            if (dpDateOfBirth.SelectedDate.HasValue == false || 
+                ValidationClass.ValidationDateBirthday(dpDateOfBirth.SelectedDate.Value) == false)
             {
                 MessageBox.Show("Ошибка в поле даты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            var resClick = MessageBox.Show("Добавить пользователя?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (resClick == MessageBoxResult.No)
+            if (isEdit)
             {
-                return;
-            }
+                var resClick = MessageBox.Show("Изменить пользователя?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            try
-            {
-                EF.Client newClient = new EF.Client();
-                newClient.ID = Convert.ToInt32(tbID.Text);
-                newClient.LastName = txtLastName.Text;
-                newClient.FirstName = txtFirstName.Text;
-                newClient.Patronymic = txtPatronymic.Text;
-                newClient.Phone = txtPhone.Text;
-                newClient.Email = txtEmail.Text;
-                newClient.DateOfBirth = dpDateOfBirth.SelectedDate.Value;
-                newClient.RegistrationDate = DateTime.Now;
-
-                if (rbMale.IsChecked == true)
+                if (resClick == MessageBoxResult.No)
                 {
-                    newClient.IDGender = 1;
-                }
-                else
-                {
-                    newClient.IDGender = 2;
+                    return;
                 }
 
-                ClassHelper.AppData.Context.Client.Add(newClient);
-                ClassHelper.AppData.Context.SaveChanges();
+                try
+                {
+                    editClient.LastName = txtLastName.Text;
+                    editClient.FirstName = txtFirstName.Text;
+                    if (txtPatronymic.Text != "")
+                    {
+                        editClient.Patronymic = txtPatronymic.Text;
+                    }
+                    editClient.Phone = txtPhone.Text;
+                    editClient.Email = txtEmail.Text;
+                    editClient.DateOfBirth = dpDateOfBirth.SelectedDate.Value;
 
-                MessageBox.Show("Пользователь добавлен");
+                    if (rbMale.IsChecked == true)
+                    {
+                        editClient.IDGender = 1;
+                    }
+                    else
+                    {
+                        editClient.IDGender = 2;
+                    }
 
-                this.Close();
+                    if (pathPhoto != null)
+                    {
+                        editClient.Photo = pathPhoto;
+                    }
+
+                    ClassHelper.AppData.Context.SaveChanges();
+
+                    MessageBox.Show("Пользователь изменен");
+                    this.Close();
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
+
+            else
             {
-                MessageBox.Show(ex.Message.ToString());
+                var resClick = MessageBox.Show("Добавить пользователя?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (resClick == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+                try
+                {
+                    EF.Client newClient = new EF.Client();
+                    newClient.LastName = txtLastName.Text;
+                    newClient.FirstName = txtFirstName.Text;
+
+                    if (txtPatronymic.Text != "")
+                    {
+                        newClient.Patronymic = txtPatronymic.Text;
+                    }
+
+                    newClient.Phone = txtPhone.Text;
+                    newClient.Email = txtEmail.Text;
+                    newClient.DateOfBirth = dpDateOfBirth.SelectedDate.Value;
+                    newClient.RegistrationDate = DateTime.Now;
+
+                    if (rbMale.IsChecked == true)
+                    {
+                        newClient.IDGender = 1;
+                    }
+                    else
+                    {
+                        newClient.IDGender = 2;
+                    }
+
+                    if (pathPhoto != null)
+                    {
+                        newClient.Photo = pathPhoto;
+                    }
+
+                    ClassHelper.AppData.Context.Client.Add(newClient);
+                    ClassHelper.AppData.Context.SaveChanges();
+
+                    MessageBox.Show("Пользователь добавлен");
+
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
             }
+            
         }
 
         private void btnChoosePhoto_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Files|*.jpg;*.jpeg;*.png;";
             if (openFile.ShowDialog() == true)
             {
                 photoUser.Source = new BitmapImage(new Uri(openFile.FileName));
