@@ -32,6 +32,6 @@ namespace Language_3ISP97_TuzhilovDvoryaninov.EF
             }
         }
 
-        public string FIO { get => $"{LastName} {FirstName} {Patronymic}"; }
+        public string FIO { get => $"{LastName} {FirstName} {Patronymic}".ToLower(); }
     }
 }

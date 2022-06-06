@@ -58,10 +58,7 @@ namespace Language_3ISP97_TuzhilovDvoryaninov
             list = Context.Client.ToList();
 
             list = list.
-                Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower())
-                || i.FirstName.ToLower().Contains(tbSearch.Text.ToLower())
-                || i.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())
-                || i.FIO.ToLower().Contains(tbSearch.Text.ToLower())
+                Where(i => i.FIO.ToLower().Contains(tbSearch.Text.ToLower())
                 || i.Phone.ToLower().Contains(tbSearch.Text.ToLower())
                 || i.Email.ToLower().Contains(tbSearch.Text.ToLower())).
                 ToList();
